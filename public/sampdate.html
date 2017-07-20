@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=&sensor=true">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+var myLatLng,lat,lgn;
+
+var queryString = document.location.href;
+var parts = queryString.split('query=');
+
+      //	address=document.getElementById('mapdisplay').innerHTML
+     // address=" Chennai "
+      address=parts[1]
+      //alert(address)
+
+address=address.replace(/(<([^>]+)>)/ig,"");
+      //alert(address)
+
+var geo = new google.maps.Geocoder;
+geo.geocode({'address':address},function(results, status){
+    if (status == google.maps.GeocoderStatus.OK) {              
+         myLatLng = results[0].geometry.location;
+
+
+        var mapOptions = {
+          center: new google.maps.LatLng(myLatLng.lat(), myLatLng.lng()),
+          zoom: 8,
+
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+
+
+
+
+// Add some code to work with myLatLng              
+
+    } else {
+        alert("Geocode was not successful for the following reason: " + status);
+    }
+});
+
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </body>
+</html>

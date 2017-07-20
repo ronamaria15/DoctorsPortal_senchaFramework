@@ -1,0 +1,10 @@
+<h1>Searching doctors by name</h1>
+<% @results.each do |doctor| %>
+
+<%= doctor.first_name %>
+<%= doctor.last_name %>
+
+<%= doctor.department %>
+<%= doctor.office_phone %>
+<%= doctor.primary_hospital_affiliation %><br>
+<% end %>
